@@ -1,4 +1,4 @@
-export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-e:down,ctrl-u:up'
+# export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-e:down,ctrl-u:up'
 # export FZF_DEFAULT_OPTS="--height 60% --layout=reverse --scroll-off=5 --preview '(highlight -O ansi -n {} || cat {}) 2> /dev/null | head -500'"
 # export FZF_DEFAULT_COMMAND='ag -g ""'
 # export FZF_DEFAULT_OPTS="--multi --cycle --inline-info --ansi --height 100% \
@@ -8,7 +8,7 @@ export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-e:down,ctrl-u:
 # export FZF_COMPLETION_OPTS="-1 --cycle --inline-info --ansi --height 60% \
 #    --border --layout=reverse --preview '$PREVIEW {}' --preview-window \
 #    'right:70%:wrap'  $FZF_PREVIEW_KEY_BIND"
-# export FZF_DEFAULT_OPTS='--bind ctrl-e:down,ctrl-u:up --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (ccat --color=always {} || highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500"'
+export FZF_DEFAULT_OPTS='--bind ctrl-e:down,ctrl-u:up --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (ccat --color=always {} || highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500"'
 # export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 
@@ -16,18 +16,18 @@ export FZF_DEFAULT_OPTS='--bind=ctrl-t:top,change:top --bind ctrl-e:down,ctrl-u:
 export FZF_DEFAULT_COMMAND='fd'
 export FZF_COMPLETION_TRIGGER='\'
 export FZF_TMUX=1
-# export FZF_TMUX_HEIGHT='80%'
-export fzf_preview_cmd='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (ccat --color=always {} || highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500'
+export FZF_TMUX_HEIGHT='80%'
+export fzf_preview_cmd='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || highlight -O ansi -l --force {} || cat {}) 2> /dev/null | head -500'
 
-local extract="
-# trim input
-local in=\${\${\"\$(<{f})\"%\$'\0'*}#*\$'\0'}
-# get ctxt for current completion
-local -A ctxt=(\"\${(@ps:\2:)CTXT}\")
-# real path
-local realpath=\${ctxt[IPREFIX]}\${ctxt[hpre]}\$in
-realpath=\${(Qe)~realpath}
-"
+# local extract="
+# # trim input
+# local in=\${\${\"\$(<{f})\"%\$'\0'*}#*\$'\0'}
+# # get ctxt for current completion
+# local -A ctxt=(\"\${(@ps:\2:)CTXT}\")
+# # real path
+# local realpath=\${ctxt[IPREFIX]}\${ctxt[hpre]}\$in
+# realpath=\${(Qe)~realpath}
+# "
 # export PREVIEW="$HOME/.config/zsh/preview.sh"
 # # zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract";$PREVIEW $realpath"
 # # zstyle ':fzf-tab:complete:*:*' extra-opts --preview=$extract";$PREVIEW $realpath"
@@ -35,8 +35,8 @@ realpath=\${(Qe)~realpath}
 # zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview 'ps --pid=$word -o cmd --no-headers -w -w'
 # zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:3:wrap'
 
-# # cd 时在右侧预览目录内容
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'extra -1 --color=always $realpath'
+# Preview file contents when triggering fzf-tab with vim
+zstyle ':fzf-tab:complet:vim:*' fzf-preview 'highlight -O ansi -l $realpath'
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support

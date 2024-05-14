@@ -5,6 +5,7 @@ source ~/.config/zsh/plugins.zsh
 source ~/.config/zsh/fzf.zsh
 source ~/.config/zsh/mappings.zsh
 source ~/.config/zsh/completion.zsh
+source ~/.config/zsh/tmux.zsh
 
 if [ -f ~/.sconfig/zsh/zshrc ]; then
 	source ~/.sconfig/zsh/zshrc
