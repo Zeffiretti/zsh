@@ -8,7 +8,7 @@
 # export FZF_COMPLETION_OPTS="-1 --cycle --inline-info --ansi --height 60% \
 #    --border --layout=reverse --preview '$PREVIEW {}' --preview-window \
 #    'right:70%:wrap'  $FZF_PREVIEW_KEY_BIND"
-export FZF_DEFAULT_OPTS='--bind ctrl-e:down,ctrl-u:up --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (ccat --color=always {} || highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500"'
+# export FZF_DEFAULT_OPTS='--bind ctrl-e:down,ctrl-u:up --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (ccat --color=always {} || highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500"'
 # export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 
@@ -36,7 +36,9 @@ export fzf_preview_cmd='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary
 # zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:3:wrap'
 
 # Preview file contents when triggering fzf-tab with vim
-zstyle ':fzf-tab:complet:vim:*' fzf-preview 'highlight -O ansi -l $realpath'
+# zstyle ':fzf-tab:complet:vim:*' fzf-preview 'highlight -O ansi -l $realpath'
+zstyle ':fzf-tab:complete:vim:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'highlight -O ansi -l $realpath'
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support

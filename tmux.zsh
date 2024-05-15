@@ -13,7 +13,7 @@ if [[ -n $TMUX ]]; then
     autoload -U add-zsh-hook
     add-zsh-hook preexec tmux_preexec
     zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-    zstyle ':fzf-tab:*' popup-pad 30 0
+    zstyle ':fzf-tab:*' popup-pad 60 0
 fi
 
 # if [[ -n $TMUX_PANE ]] && (( $+commands[tmux] )) && (( $+commands[fzfp] )); then
